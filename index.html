@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dallas Foster | Portfolio</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* THEME: purple / red / midnight blue galaxy */
+      --bg: #020016;
+      --bg-elevated: #06081e;
+      --accent: #c084fc;            /* soft purple */
+      --accent-soft: rgba(192, 132, 252, 0.14);
+      --accent-strong: rgba(192, 132, 252, 0.26);
+      --accent-hot: #fb7185;        /* reddish-pink */
+      --text-main: #f9f5ff;
+      --text-muted: #a3a6c3;
+      --border-subtle: #181b3a;
+      --danger: #ff5c8a;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --shadow-soft: 0 20px 50px rgba(0, 0, 0, 0.7);
+      --shadow-subtle: 0 12px 30px rgba(0, 0, 0, 0.55);
+      --transition-fast: 180ms ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 0% 0%, #2b0b75 0, transparent 45%),
+        radial-gradient(circle at 100% 0%, #4f0b3a 0, transparent 45%),
+        radial-gradient(circle at 10% 100%, #111827 0, transparent 40%),
+        #020016;
+      color: var(--text-main);
+      line-height: 1.7;
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1120px;
+      background:
+        radial-gradient(circle at top left, rgba(192, 132, 252, 0.26) 0, transparent 55%) border-box,
+        radial-gradient(circle at bottom right, rgba(248, 113, 113, 0.26) 0, transparent 55%) border-box,
+        rgba(6, 8, 30, 0.98);
+      border-radius: 28px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow: var(--shadow-soft);
+      padding: 22px 22px 32px;
+      backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page::before {
+      /* faint nebula noise overlay */
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.06) 0, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(129, 140, 248, 0.18) 0, transparent 55%);
+      opacity: 0.7;
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+    }
+
+    .page-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 768px) {
+      .page {
+        padding: 30px 34px 40px;
+      }
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid rgba(55, 65, 81, 0.8);
+      padding-bottom: 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 2px solid rgba(248, 250, 252, 0.2);
+      background:
+        radial-gradient(circle at 20% 0%, #f97316 0, transparent 55%),
+        radial-gradient(circle at 80% 50%, #c084fc 0, transparent 50%),
+        radial-gradient(circle at 20% 100%, #0ea5e9 0, #020617 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      color: #fff7ff;
+      box-shadow: 0 0 40px rgba(192, 132, 252, 0.9);
+    }
+
+    .brand-text h1 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .brand-text p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      font-size: 0.82rem;
+      text-decoration: none;
+      color: var(--text-muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.6);
+      transition:
+        background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        transform 120ms ease-out;
+    }
+
+    nav a span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(192, 132, 252, 0.9);
+    }
+
+    nav a:hover {
+      background: rgba(30, 64, 175, 0.85);
+      border-color: rgba(191, 219, 254, 0.9);
+      color: #f9fafb;
+      transform: translateY(-1px);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 880px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Hero / summary panel */
+    .hero {
+      background:
+        radial-gradient(circle at top left, rgba(129, 140, 248, 0.3), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(248, 113, 113, 0.25), transparent 55%),
+        var(--bg-elevated);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-subtle);
+      padding: 20px 20px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      backdrop-filter: blur(10px);
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 14px rgba(34, 197, 94, 0.9);
+    }
+
+    .pill span.highlight {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .hero h2 {
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      line-height: 1.15;
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .hero h2 span.accent {
+      background: linear-gradient(120deg, #e5e7eb, #c4b5fd, #fb7185);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero h3 {
+      font-size: 0.98rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .hero-metadata {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .hero-tag {
+      font-size: 0.78rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-tag span.label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #a1a1aa;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      font-size: 0.8rem;
+      padding: 9px 16px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: none;
+      color: inherit;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition:
+        background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        transform 120ms ease-out,
+        box-shadow 120ms ease-out;
+    }
+
+    .btn-primary {
+      background:
+        radial-gradient(circle at 10% 0, #f97316, transparent 55%),
+        linear-gradient(135deg, #6366f1, #ec4899);
+      border: none;
+      color: #f9fafb;
+      box-shadow: 0 16px 38px rgba(79, 70, 229, 0.7);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) translateZ(0);
+      box-shadow: 0 22px 50px rgba(79, 70, 229, 0.9);
+    }
+
+    .btn-ghost {
+      border-color: rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(30, 64, 175, 0.85);
+      border-color: rgba(129, 140, 248, 1);
+    }
+
+    .btn-primary span.icon,
+    .btn-ghost span.icon {
+      font-size: 1rem;
+    }
+
+    /* Right column: panels */
+    .panel-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .panel {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 14px 14px 12px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.55);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      gap: 10px;
+    }
+
+    .panel-title {
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-title-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 14px rgba(192, 132, 252, 0.9);
+    }
+
+    .panel-chip {
+      font-size: 0.7rem;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-muted);
+    }
+
+    .panel-body {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .panel-body p + p {
+      margin-top: 6px;
+    }
+
+    .tag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+      white-space: nowrap;
+    }
+
+    .tag.accent {
+      background: var(--accent-soft);
+      border-color: rgba(192, 132, 252, 0.9);
+      color: #f5f3ff;
+    }
+
+    /* Projects */
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .project {
+      padding: 8px 9px;
+      border-radius: 14px;
+      background:
+        linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(17, 24, 39, 0.98));
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.5fr);
+      gap: 8px;
+    }
+
+    .project-main h4 {
+      font-size: 0.86rem;
+      margin-bottom: 2px;
+      color: #e5e7eb;
+    }
+
+    .project-main p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .project-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-end;
+      justify-content: center;
+      font-size: 0.75rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      justify-content: flex-end;
+    }
+
+    .project-tags span {
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      color: #9ca3af;
+    }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+
+    .project-links a {
+      font-size: 0.75rem;
+      text-decoration: none;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(129, 140, 248, 0.9);
+      background: rgba(15, 23, 42, 0.9);
+      color: #c7d2fe;
+      transition: background var(--transition-fast), transform 120ms ease-out;
+    }
+
+    .project-links a:hover {
+      background: rgba(79, 70, 229, 0.85);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 600px) {
+      .project {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .project-meta {
+        align-items: flex-start;
+      }
+
+      .project-tags,
+      .project-links {
+        justify-content: flex-start;
+      }
+    }
+
+    /* Experience */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.2fr);
+      gap: 8px;
+      padding: 7px 8px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+    }
+
+    .exp-role {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .exp-company {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .exp-meta {
+      font-size: 0.76rem;
+      color: #9ca3af;
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    @media (max-width: 640px) {
+      .exp-item {
+        grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
+      }
+    }
+
+    /* Contact */
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+      align-items: center;
+    }
+
+    .contact-item {
+      font-size: 0.8rem;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: #e5e7eb;
+      text-decoration: none;
+    }
+
+    .contact-item span.icon {
+      font-size: 0.95rem;
+    }
+
+    .contact-item:hover {
+      border-color: rgba(192, 132, 252, 1);
+    }
+
+    footer {
+      margin-top: 22px;
+      font-size: 0.76rem;
+      color: #9ca3af;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding-top: 10px;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="page-inner">
+      <header>
+        <div class="brand">
+          <div class="brand-avatar">DF</div>
+          <div class="brand-text">
+            <h1>Dallas Foster</h1>
+            <p>Operations &amp; AI Student</p>
+          </div>
+        </div>
+
+        <nav>
+          <a href="#about"><span class="dot"></span> About</a>
+          <a href="#skills"><span class="dot"></span> Skills</a>
+          <a href="#projects"><span class="dot"></span> Projects</a>
+          <a href="#experience"><span class="dot"></span> Experience</a>
+          <a href="#contact"><span class="dot"></span> Contact</a>
+        </nav>
+      </header>
+
+      <main>
+        <!-- Left: Hero -->
+        <section class="hero" id="about">
+          <div class="hero-inner">
+            <div class="pill">
+              <span class="pill-dot"></span>
+              <span>Open to <span class="highlight">remote / hybrid tech &amp; ops roles</span></span>
+            </div>
+
+            <h2>Hi, I'm <span class="accent">Dallas</span>.</h2>
+            <h3>I blend high-volume logistics, QA testing, and AI coursework into practical, reliable operations.</h3>
+
+            <p>
+              I’m a logistics and operations professional with experience managing long delivery routes,
+              testing AI systems, and studying computer science and artificial intelligence. I like taking real-world
+              chaos—routes, schedules, data, and processes—and turning it into clear, simple systems that teams
+              can actually use. I’m especially interested in roles where I can grow into data, operations,
+              or technical support while still staying close to real customers and problems.
+            </p>
+
+            <div class="hero-metadata">
+              <div class="hero-tag">
+                <span class="label">Focus</span>
+                Early-career data / ops / support
+              </div>
+              <div class="hero-tag">
+                <span class="label">Location</span>
+                Texas · Open to remote
+              </div>
+            </div>
+
+            <div class="hero-actions">
+              <!-- Contact email -->
+              <a class="btn-primary" href="mailto:randallas93@gmail.com?subject=Regarding%20your%20portfolio">
+                <span class="icon">📩</span>
+                <span>Contact me</span>
+              </a>
+
+              <!-- Resume link (can be LinkedIn or a hosted PDF) -->
+              <a class="btn-ghost" href="https://www.linkedin.com/in/dallranfo/" target="_blank" rel="noopener">
+                <span class="icon">📄</span>
+                <span>View resume on LinkedIn</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Right: Panels -->
+        <div class="panel-group">
+          <section class="panel" id="skills">
+            <div class="panel-header">
+              <div class="panel-title">
+                <span class="panel-title-indicator"></span>
+                Skills
+              </div>
+              <div class="panel-chip">What I work with</div>
+            </div>
+            <div class="panel-body">
+              <p>Core skills I bring to a team:</p>
+              <div class="tag-grid">
+                <!-- TECH / ANALYTICS -->
+                <span class="tag accent">Python programming</span>
+                <span class="tag accent">Excel &amp; Google Sheets</span>
+                <span class="tag accent">Quality assurance &amp; testing</span>
+                <span class="tag">Data entry &amp; cleanup</span>
+                <span class="tag">Reporting &amp; simple dashboards</span>
+
+                <!-- OPERATIONS -->
+                <span class="tag">Route planning &amp; logistics</span>
+                <span class="tag">Independent work management</span>
+                <span class="tag">Time management &amp; organization</span>
+                <span class="tag">Customer service &amp; sales</span>
+
+                <!-- CREATIVE / TECHNICAL -->
+                <span class="tag">Digital media &amp; graphic design</span>
+                <span class="tag">Custom PC building</span>
+                <span class="tag">Motorcycle customization</span>
+
+                <!-- PERSONAL -->
+                <span class="tag">Strong communication</span>
+                <span class="tag">Decision making under pressure</span>
+                <span class="tag">Adaptability</span>
+                <span class="tag">Highly advanced computer skills</span>
+              </div>
+
+              <p style="margin-top: 10px; font-size: 0.8rem; color: var(--text-muted);">
+                <strong>Currently learning:</strong> Google Data Analytics, foundations of AI &amp; ML,
+                and building small tools like desktop flashcard apps.
+              </p>
+            </div>
+          </section>
+
+          <!-- PROJECTS: Easy area to add EXE / ZIP links -->
+          <section class="panel" id="projects">
+            <div class="panel-header">
+              <div class="panel-title">
+                <span class="panel-title-indicator"></span>
+                Projects
+              </div>
+              <div class="panel-chip">Selected work</div>
+            </div>
+            <div class="panel-body">
+              <p style="margin-bottom: 6px;">
+                A few practical things I’ve built or worked on. I keep this section updated as I finish new projects.
+              </p>
+
+              <!--
+                TO ADD A NEW PROJECT:
+                1. Copy one full <article class="project"> ... </article> block.
+                2. Paste it below the others.
+                3. Change the title, description, tags, and link hrefs.
+                4. If you add a new file (EXE/ZIP) to a "projects/" folder next to this HTML file,
+                   update the href like: href="projects/your-file-name.zip"
+              -->
+
+              <div class="project-list">
+                <!-- PROJECT 1: Flashcards app -->
+                <article class="project">
+                  <div class="project-main">
+                    <h4>Vocabulary Flashcards Desktop App</h4>
+                    <p>
+                      A simple flashcard program built as a desktop .exe to drill vocabulary.
+                      Supports custom word lists, randomization, and a clean, focused UI for study sessions.
+                    </p>
+                  </div>
+                  <div class="project-meta">
+                    <div class="project-tags">
+                      <span>Python</span>
+                      <span>Desktop app</span>
+                      <span>Self-study tool</span>
+                    </div>
+                    <div class="project-links">
+                      <!-- Update these once you know your filenames/paths -->
+                      <a href="projects/flashcards.exe" download>Download .exe</a>
+                      <a href="projects/flashcards_dist.zip" download>Download .zip</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- PROJECT 2: Store performance / EOD dashboard -->
+                <article class="project">
+                  <div class="project-main">
+                    <h4>Retail Store Performance Dashboard</h4>
+                    <p>
+                      Spreadsheet-based dashboard to track daily sales, product categories, and trends.
+                      Helped surface top-selling items, weak categories, and more accurate re-ordering priorities.
+                    </p>
+                  </div>
+                  <div class="project-meta">
+                    <div class="project-tags">
+                      <span>Excel / Sheets</span>
+                      <span>Sales analysis</span>
+                      <span>Retail ops</span>
+                    </div>
+                    <div class="project-links">
+                      <a href="#" target="_blank" rel="noopener">Link to dashboard (optional)</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- PROJECT 3: Process / onboarding docs -->
+                <article class="project">
+                  <div class="project-main">
+                    <h4>Operations &amp; Onboarding Documentation</h4>
+                  <p>
+                    Wrote and refined procedures, checklists, and simple guides for day-to-day work.
+                    Focused on opening/closing routines, customer service standards, and making it easier
+                    for new people to get up to speed.
+                  </p>
+                  </div>
+                  <div class="project-meta">
+                    <div class="project-tags">
+                      <span>Process documentation</span>
+                      <span>Training</span>
+                      <span>Operations</span>
+                    </div>
+                    <div class="project-links">
+                      <a href="#" target="_blank" rel="noopener">Sample docs (optional)</a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- PROJECT 4: Learning / AI & analytics -->
+                <article class="project">
+                  <div class="project-main">
+                    <h4>AI &amp; Data Learning Portfolio</h4>
+                    <p>
+                      Ongoing collection of course notes, small practice analyses, and experiments related to AI and
+                      data analytics, including work from the Google Data Analytics Professional Certificate.
+                    </p>
+                  </div>
+                  <div class="project-meta">
+                    <div class="project-tags">
+                      <span>Google Data Analytics</span>
+                      <span>AI fundamentals</span>
+                    </div>
+                    <div class="project-links">
+                      <a href="#" target="_blank" rel="noopener">View notes / certs (optional)</a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel" id="experience">
+            <div class="panel-header">
+              <div class="panel-title">
+                <span class="panel-title-indicator"></span>
+                Experience
+              </div>
+              <div class="panel-chip">Recent roles</div>
+            </div>
+            <div class="panel-body">
+              <div class="exp-list">
+                <!-- JOB: PGW American Glass -->
+                <div class="exp-item">
+                  <div>
+                    <div class="exp-role">Car Windshield &amp; Glass Delivery Driver</div>
+                    <div class="exp-company">PGW American Glass</div>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">
+                      Managed 300–350 mile daily delivery routes with minimal supervision,
+                      starting at 3am and controlling access to company facilities. Built a track record
+                      of on-time, accurate deliveries and strong communication with customers.
+                    </p>
+                  </div>
+                  <div class="exp-meta">
+                    <span>Houston, TX</span>
+                    <span>05/2022 – Present</span>
+                  </div>
+                </div>
+
+                <!-- JOB: Welocalize -->
+                <div class="exp-item">
+                  <div>
+                    <div class="exp-role">Quality Assurance Linguistics Tester</div>
+                    <div class="exp-company">Welocalize (Remote)</div>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">
+                      Evaluated AI responses with high accuracy and attention to detail.
+                      Maintained strong efficacy scores while working independently under NDA,
+                      completing a full workload in 8-hour shifts.
+                    </p>
+                  </div>
+                  <div class="exp-meta">
+                    <span>Remote · Houston, TX</span>
+                    <span>11/2021 – 05/2022</span>
+                  </div>
+                </div>
+
+                <!-- JOB: Student -->
+                <div class="exp-item">
+                  <div>
+                    <div class="exp-role">Student · Computer Science &amp; Artificial Intelligence</div>
+                    <div class="exp-company">Houston Community College</div>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">
+                      Pursuing an associate’s degree in Computer Science and AI while working full time.
+                      Completed courses in Python, digital media, college algebra, English, and learning frameworks.
+                    </p>
+                  </div>
+                  <div class="exp-meta">
+                    <span>Houston, TX</span>
+                    <span>09/2023 – Present</span>
+                  </div>
+                </div>
+
+                <!-- OPTIONAL: add your current smoke shop / Planet CBD manager role here
+                     once you're ready, using the same structure as the items above. -->
+              </div>
+            </div>
+          </section>
+
+          <section class="panel" id="contact">
+            <div class="panel-header">
+              <div class="panel-title">
+                <span class="panel-title-indicator"></span>
+                Contact
+              </div>
+              <div class="panel-chip">Let’s talk</div>
+            </div>
+            <div class="panel-body">
+              <p>If you’d like to talk about a role or collaboration, you can reach me here:</p>
+              <div class="contact-row">
+                <a class="contact-item" href="mailto:randallas93@gmail.com">
+                  <span class="icon">✉️</span>
+                  <span>randallas93@gmail.com</span>
+                </a>
+                <a class="contact-item" href="tel:+12817537139">
+                  <span class="icon">📱</span>
+                  <span>+1 (281) 753-7139</span>
+                </a>
+                <a class="contact-item" href="https://www.linkedin.com/in/dallranfo/" target="_blank" rel="noopener">
+                  <span class="icon">🔗</span>
+                  <span>LinkedIn / Resume</span>
+                </a>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer>
+        <span>© <span id="year"></span> Dallas Foster</span>
+        <span>Built with plain HTML &amp; CSS · Galaxy theme</span>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Auto-set year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
