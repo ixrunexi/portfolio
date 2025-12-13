@@ -611,7 +611,34 @@
     html {
       scroll-behavior: smooth;
     }
-  </style>
+  
+    /* ===== Desktop layout rework (keeps mobile stacking) ===== */
+    main.layout{
+      display: grid;
+      gap: 18px;
+      align-items: start;
+    }
+    /* Mobile / narrow: one column (unchanged behavior) */
+    @media (max-width: 980px){
+      main.layout{
+        grid-template-columns: 1fr;
+      }
+    }
+    /* Desktop: two-column masonry-style flow to avoid blank space */
+    @media (min-width: 981px){
+      main.layout{
+        grid-template-columns: 1.08fr 0.92fr;
+        grid-auto-flow: row dense;
+      }
+      /* Give the hero a slightly stronger presence without forcing full height */
+      .hero{
+        position: sticky;
+        top: 20px;
+        align-self: start;
+      }
+    }
+
+</style>
 </head>
 <body>
   <div class="page">
@@ -634,7 +661,7 @@
         </nav>
       </header>
 
-      <main>
+      <main class="layout">
         <!-- Left: Hero -->
         <section class="hero" id="about">
           <div class="hero-inner">
@@ -682,7 +709,7 @@ I value personal accountability, kindness, structure, and the belief that strong
         </section>
 
         <!-- Right: Panels -->
-        <div class="panel-group">
+        
           <section class="panel" id="skills">
             <div class="panel-header">
               <div class="panel-title">
@@ -798,7 +825,7 @@ I value personal accountability, kindness, structure, and the belief that strong
           </section>
 
           <!-- EXPERIENCE -->
-<section class="panel" id="experience">
+          <section class="panel" id="experience">
             <div class="panel-header">
               <div class="panel-title">
                 <span class="panel-title-indicator"></span>
@@ -807,21 +834,26 @@ I value personal accountability, kindness, structure, and the belief that strong
               <div class="panel-chip">Recent roles</div>
             </div>
             <div class="panel-body">
-              <article class="experience">
-                <div class="experience-header">
-                  <h4>Store Manager</h4>
-                  <span class="experience-org">Planet 420 Smoke & Vape Shop</span>
-                  <span class="experience-dates">Current</span>
-                </div>
-                <ul class="experience-details">
-                  <li>Manage daily store operations, staffing, scheduling, and opening/closing procedures.</li>
-                  <li>Oversee inventory, vendor ordering, compliance, and loss prevention.</li>
-                  <li>Handle customer relations, conflict resolution, and staff training.</li>
-                  <li>Create and manage sales tracking, documentation, and operational processes.</li>
-                </ul>
-              </article>
+<div class="exp-list">
 
-              <div class="exp-list">
+                <!-- JOB: Planet 420 Smoke & Vape Shop -->
+                <div class="exp-item">
+                  <div>
+                    <div class="exp-role">Store Manager</div>
+                    <div class="exp-company">Planet 420 Smoke &amp; Vape Shop</div>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">
+                      Manage daily store operations, staffing, scheduling, and opening/closing procedures.
+                      Oversee inventory, vendor ordering, compliance, and loss prevention.
+                      Handle customer relations, conflict resolution, and staff training, and maintain sales tracking
+                      and documentation to support consistent store performance.
+                    </p>
+                  </div>
+                  <div class="exp-meta">
+                    <span>San Antonio, TX</span>
+                    <span>Current</span>
+                  </div>
+                </div>
+
                 <!-- JOB: PGW American Glass -->
                 <div class="exp-item">
                   <div>
@@ -904,7 +936,7 @@ I value personal accountability, kindness, structure, and the belief that strong
               </div>
             </div>
           </section>
-        </div>
+
       </main>
 
       <footer>
